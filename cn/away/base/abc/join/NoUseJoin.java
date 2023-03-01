@@ -2,7 +2,7 @@ package cn.away.base.abc.join;
 
 
 /**
- *类说明：无Join时线程的表现
+ * 类说明：无Join时线程的表现
  */
 public class NoUseJoin {
 	
@@ -31,7 +31,6 @@ public class NoUseJoin {
     }
 
     static class GoddessBoyfriend implements Runnable {
-
         @Override
         public void run() {
             System.out.println("GoddessBoyfriend开始排队打饭.....");
@@ -41,7 +40,6 @@ public class NoUseJoin {
     }
 
     public static void main(String[] args) throws Exception {
-
         Thread zhuGe = Thread.currentThread();
         GoddessBoyfriend goddessBoyfriend = new GoddessBoyfriend();
         Thread gbf = new Thread(goddessBoyfriend);
@@ -53,4 +51,5 @@ public class NoUseJoin {
         //SleepTools.second(2);//让主线程休眠2秒
         System.out.println(zhuGe.getName() + " zhuGe打饭完成.");
     }
+
 }

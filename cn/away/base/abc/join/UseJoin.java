@@ -1,10 +1,9 @@
 package cn.away.base.abc.join;
 
-
 import cn.away.tools.SleepTools;
 
 /**
- *类说明：演示Join（）方法的使用
+ * 类说明：演示Join（）方法的使用 控制顺序
  */
 public class UseJoin {
 	
@@ -34,7 +33,6 @@ public class UseJoin {
     }
 
     static class GoddessBoyfriend implements Runnable {
-
         @Override
         public void run() {
             SleepTools.second(2);//休眠2秒
@@ -45,7 +43,6 @@ public class UseJoin {
     }
 
     public static void main(String[] args) throws Exception {
-
         Thread zhuGe = Thread.currentThread();
         GoddessBoyfriend goddessBoyfriend = new GoddessBoyfriend();
         Thread gbf = new Thread(goddessBoyfriend);
