@@ -16,10 +16,13 @@ public class NoUseJoin {
         public Goddess() {
         }
 
+        @Override
         public void run() {
             System.out.println("Goddess开始排队打饭.....");
             try {
-                if(thread!=null) thread.join();
+                if (thread != null) {
+                    thread.join();
+                }
             } catch (InterruptedException e) {
             }
             System.out.println(Thread.currentThread().getName()
@@ -29,6 +32,7 @@ public class NoUseJoin {
 
     static class GoddessBoyfriend implements Runnable {
 
+        @Override
         public void run() {
             System.out.println("GoddessBoyfriend开始排队打饭.....");
             System.out.println(Thread.currentThread().getName()

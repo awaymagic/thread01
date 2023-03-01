@@ -18,10 +18,13 @@ public class UseJoin {
         public Goddess() {
         }
 
+        @Override
         public void run() {
             System.out.println("Goddess开始排队打饭.....");
             try {
-                if(thread!=null) thread.join();
+                if (thread != null) {
+                    thread.join();
+                }
             } catch (InterruptedException e) {
             }
             SleepTools.second(2);//休眠2秒
@@ -32,6 +35,7 @@ public class UseJoin {
 
     static class GoddessBoyfriend implements Runnable {
 
+        @Override
         public void run() {
             SleepTools.second(2);//休眠2秒
             System.out.println("GoddessBoyfriend开始排队打饭.....");
@@ -54,4 +58,5 @@ public class UseJoin {
         SleepTools.second(2);//让主线程休眠2秒
         System.out.println(zhuGe.getName() + " zhuGe打饭完成.");
     }
+
 }

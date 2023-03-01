@@ -4,17 +4,21 @@ import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
 
+/**
+ * 基于管道的输入输出
+ */
 public class Piped {
+
     public static void main(String[] args) throws Exception {
         PipedWriter out = new PipedWriter();
         PipedReader in = new PipedReader();
-        /* 将输出流和输入流进行连接，否则在使用时会抛出IOException*/
+        /* 将输出流和输入流进行连接，否则在使用时会抛出IOException */
         out.connect(in);
         Thread printThread = new Thread(new Print(in), "PrintThread");
         printThread.start();
-        int receive = 0;
+        int receive;
         try {
-            /*将键盘的输入，用输出流接受，在实际的业务中，可以将文件流导给输出流*/
+            /*将键盘的输入，用输出流接受，在实际的业务中，可以将文件流导给输出流 */
             while ((receive = System.in.read()) != -1){
                 out.write(receive);
             }
@@ -24,22 +28,23 @@ public class Piped {
     }
 
     static class Print implements Runnable {
-        private PipedReader in;
+        private final PipedReader in;
         public Print(PipedReader in) {
             this.in = in;
         }
 
         @Override
         public void run() {
-            int receive = 0;
+            int receive;
             try {
-                /*输入流从输出流接收数据，并在控制台显示
+                /* 输入流从输出流接收数据，并在控制台显示
                 *在实际的业务中，可以将输入流直接通过网络通信写出 */
                 while ((receive = in.read()) != -1){
                     System.out.print((char) receive);
                 }
-            } catch (IOException ex) {
+            } catch (IOException ignored) {
             }
         }
     }
+
 }
