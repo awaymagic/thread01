@@ -1,9 +1,11 @@
 package cn.away.base.vola;
 
 /**
- * 类说明：
+ * 类说明：volatile 并不能能保证数据在多个线程下同时写时的线程安全
+ *        volatile 最适用的场景:一个线程写，多个线程读
  */
 public class NotSafe {
+
     private volatile long count =0;
 
     public long getCount() {
@@ -14,12 +16,12 @@ public class NotSafe {
         this.count = count;
     }
 
-    //count进行累加
+    // count进行累加
     public void incCount(){
         count++;
     }
 
-    //线程
+    // 线程
     private static class Count extends Thread{
 
         private NotSafe simplOper;
@@ -30,7 +32,7 @@ public class NotSafe {
 
         @Override
         public void run() {
-            for(int i=0;i<10000;i++){
+            for (int i = 0; i < 10000; i++) {
                 simplOper.incCount();
             }
         }
