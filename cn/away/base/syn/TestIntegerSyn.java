@@ -2,6 +2,7 @@ package cn.away.base.syn;
 
 /**
  * 类说明：错误的加锁和原因分析
+ * 被修饰的对象必须试试同一个才会生效，不然是没用的
  */
 public class TestIntegerSyn {
 

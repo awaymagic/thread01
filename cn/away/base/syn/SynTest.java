@@ -1,12 +1,13 @@
 package cn.away.base.syn;
 
 /**
- *类说明：synchronized关键字的使用方法
+ * 类说明：synchronized关键字的使用方法
  */
 public class SynTest {
 
-	private long count =0;
-	private Object obj = new Object();//作为一个锁
+	private long count = 0;
+	// 作为一个锁
+	private Object obj = new Object();
 
 	public long getCount() {
 		return count;
@@ -16,14 +17,14 @@ public class SynTest {
 		this.count = count;
 	}
 
-	/*用在同步块上*/
+	/** 用在同步块上 */
 	public void incCount(){
 		synchronized (this){
 			count++;
 		}
 	}
 
-
+	/** 用在方法上 */
 	public synchronized void incCount4(){
 			count++;
 	}
@@ -33,7 +34,7 @@ public class SynTest {
 			count++;
 	}
 
-	/*用在同步块上，但是锁的是当前类的对象实例*/
+	/** 用在同步块上，但是锁的是当前类的对象实例 */
 	public void incCount3(){
 		synchronized (this){
 			count++;
@@ -41,7 +42,9 @@ public class SynTest {
 
 	}
 
-	//线程
+	/**
+	 * 线程
+	 */
 	private static class Count extends Thread{
 
 		private SynTest simplOper;
@@ -52,8 +55,8 @@ public class SynTest {
 
 		@Override
 		public void run() {
-			for(int i=0;i<10000;i++){
-				simplOper.incCount();//count = count+10000
+			for (int i = 0; i < 10000; i++) {
+				simplOper.incCount();//count = count + 10000
 			}
 		}
 	}
