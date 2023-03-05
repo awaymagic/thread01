@@ -7,26 +7,33 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *类说明：
+ * 类说明：DBPoolTest
  */
 public class DBPoolTest {
+
     static DBPool pool  = new DBPool(10);
-    // 控制器:控制main线程将会等待所有Woker结束后才能继续执行
+    /**
+     * 控制器:控制main线程将会等待所有 Woker 结束后才能继续执行
+     */
     static CountDownLatch end;
 
     public static void main(String[] args) throws Exception {
     	// 线程数量
         int threadCount = 50;
         end = new CountDownLatch(threadCount);
-        int count = 20;//每个线程的操作次数
-        AtomicInteger got = new AtomicInteger();//计数器：统计可以拿到连接的线程
-        AtomicInteger notGot = new AtomicInteger();//计数器：统计没有拿到连接的线程
+        // 每个线程的操作次数
+        int count = 20;
+        // 计数器：统计可以拿到连接的线程
+        AtomicInteger got = new AtomicInteger();
+        // 计数器：统计没有拿到连接的线程
+        AtomicInteger notGot = new AtomicInteger();
         for (int i = 0; i < threadCount; i++) {
-            Thread thread = new Thread(new Worker(count, got, notGot), 
-            		"worker_"+i);
+            Thread thread = new Thread(new Worker(count, got, notGot),
+                    "worker_" + i);
             thread.start();
         }
-        end.await();// main线程在此处等待
+        // main线程在此处等待
+        end.await();
         System.out.println("总共尝试了: " + (threadCount * count));
         System.out.println("拿到连接的次数：  " + got);
         System.out.println("没能连接的次数： " + notGot);
@@ -44,6 +51,7 @@ public class DBPoolTest {
             this.notGot = notGot;
         }
 
+        @Override
         public void run() {
             while (count > 0) {
                 try {
@@ -66,8 +74,7 @@ public class DBPoolTest {
                         got.incrementAndGet();
                     } else {
                         notGot.incrementAndGet();
-                        System.out.println(Thread.currentThread().getName()
-                        		+"等待超时!");
+                        System.out.println(Thread.currentThread().getName() + "等待超时!");
                     }
                 } catch (Exception ex) {
                 } finally {

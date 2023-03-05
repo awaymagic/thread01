@@ -3,8 +3,8 @@ package cn.away.tools;
 import java.util.concurrent.TimeUnit;
 
 /**
- *@author Mark老师
- *类说明：线程休眠辅助工具类
+ * @author Mark老师
+ * 类说明：线程休眠辅助工具类
  */
 public class SleepTools {
 	

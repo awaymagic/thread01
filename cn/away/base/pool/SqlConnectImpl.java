@@ -8,12 +8,12 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
- *类说明：
+ * 类说明：数据库连接池实现
  */
 public class SqlConnectImpl implements Connection{
 	
-	/*拿一个数据库连接*/
-    public static final Connection fetchConnection(){
+	/** 拿一个数据库连接 */
+    public static Connection fetchConnection(){
         return new SqlConnectImpl();
     }
 
@@ -49,6 +49,7 @@ public class SqlConnectImpl implements Connection{
 
 	@Override
 	public void commit() throws SQLException {
+		// 休眠
 		SleepTools.ms(70);
 	}
 
@@ -84,6 +85,7 @@ public class SqlConnectImpl implements Connection{
 
 	@Override
 	public Statement createStatement() throws SQLException {
+		// 休眠
 		SleepTools.ms(1);
 		return null;
 	}
