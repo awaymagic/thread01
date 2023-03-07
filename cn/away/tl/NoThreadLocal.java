@@ -1,7 +1,7 @@
 package cn.away.tl;
 
 /**
- * @author Mark老师   享学课堂 https://enjoy.ke.qq.com
+ * @author Mark老师
  * 类说明：
  */
 public class NoThreadLocal {

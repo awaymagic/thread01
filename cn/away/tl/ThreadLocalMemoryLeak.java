@@ -8,12 +8,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mark老师
- * 类说明：
+ * 类说明：用JVM分析工具看占用
  */
 public class ThreadLocalMemoryLeak {
     private static final int TASK_LOOP_SIZE = 500;
 
-    /*线程池*/
+    /** 线程池 */
     final static ThreadPoolExecutor poolExecutor
             = new ThreadPoolExecutor(5, 5, 1,
             TimeUnit.MINUTES,
@@ -29,17 +29,18 @@ public class ThreadLocalMemoryLeak {
         SleepTools.ms(4000);
         for (int i = 0; i < TASK_LOOP_SIZE; ++i) {
             poolExecutor.execute(new Runnable() {
+                @Override
                 public void run() {
                     SleepTools.ms(500);
 //
 //                    LocalVariable localVariable = new LocalVariable();
 //
 //
-//                    ThreadLocalMemoryLeak oom = new ThreadLocalMemoryLeak();
-//                    oom.threadLocalLV = new ThreadLocal<>();
-//                    oom.threadLocalLV.set(new LocalVariable());
-//
-//                   oom.threadLocalLV.remove();
+                   ThreadLocalMemoryLeak oom = new ThreadLocalMemoryLeak();
+                   oom.threadLocalLV = new ThreadLocal<>();
+                   oom.threadLocalLV.set(new LocalVariable());
+                  // 手动回收 remove()
+                  oom.threadLocalLV.remove();
 
                     System.out.println("use local varaible");
 
