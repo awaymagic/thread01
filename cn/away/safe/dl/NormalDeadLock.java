@@ -26,11 +26,11 @@ public class NormalDeadLock {
     //第二个拿锁的方法
     private static void monkeyDo() throws InterruptedException {
         String threadName = Thread.currentThread().getName();
-        synchronized (No13){
-            System.out.println(threadName + " get No13");
+        synchronized (No14){
+            System.out.println(threadName + " get No14");
             Thread.sleep(100);
-            synchronized (No14){
-                System.out.println(threadName + " get No14");
+            synchronized (No13){
+                System.out.println(threadName + " get No13");
             }
         }
     }

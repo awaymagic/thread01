@@ -10,12 +10,12 @@ public class DynDeadLock {
     private static Object No2 = new Object();//第二个锁
 
     /*公共业务方法*/
-    private static void businessDo(Object first,Object second) throws InterruptedException {
+    private static void businessDo(Object first, Object second) throws InterruptedException {
         String threadName = Thread.currentThread().getName();
-        synchronized (first){
+        synchronized (first) {
             System.out.println(threadName + " get first");
             Thread.sleep(100);
-            synchronized (second){
+            synchronized (second) {
                 System.out.println(threadName + " get second");
             }
         }
@@ -34,7 +34,7 @@ public class DynDeadLock {
         public void run() {
             Thread.currentThread().setName(name);
             try {
-                businessDo(No1,No2);
+                businessDo(No1, No2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -46,7 +46,7 @@ public class DynDeadLock {
         Thread.currentThread().setName("Monkey");
         ZhouYu zhouYu = new ZhouYu("ZhouYu");
         zhouYu.start();
-        businessDo(No2,No1);
+        businessDo(No2, No1);
     }
 
 }

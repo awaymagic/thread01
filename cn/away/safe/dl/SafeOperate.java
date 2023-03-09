@@ -13,7 +13,7 @@ public class SafeOperate {
 
     public void transfer(Object first,Object second)
             throws InterruptedException {
-
+        // java 语言给的标识符，和内存密切相关,越小越先创建的。
         int firstHash = System.identityHashCode(first);
         int secondHash = System.identityHashCode(second);
 

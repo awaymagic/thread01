@@ -5,14 +5,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- *@author Mark老师   图灵学院 https://www.tulingxueyuan.cn/
- *类说明：演示普通账户的死锁和解决
+ * @author Mark老师   图灵学院 https://www.tulingxueyuan.cn/
+ * 类说明：演示普通账户的死锁和解决
  */
 public class TryLock {
     private static Lock No13 = new ReentrantLock();//第一个锁
     private static Lock No14 = new ReentrantLock();//第二个锁
 
-    //先尝试拿No13 锁，再尝试拿No14锁，No14锁没拿到，连同No13 锁一起释放掉
+    // 先尝试拿No13 锁，再尝试拿No14锁，No14锁没拿到，连同No13 锁一起释放掉
     private static void zhouYuDo() throws InterruptedException {
         String threadName = Thread.currentThread().getName();
         Random r = new Random();
@@ -34,7 +34,8 @@ public class TryLock {
                 }
 
             }
-            //Thread.sleep(r.nextInt(3));
+            // 延缓获取时间
+            Thread.sleep(r.nextInt(3));
         }
     }
 
@@ -60,7 +61,7 @@ public class TryLock {
                 }
 
             }
-            //Thread.sleep(r.nextInt(3));
+            Thread.sleep(r.nextInt(3));
         }
     }
 
@@ -72,6 +73,7 @@ public class TryLock {
             this.name = name;
         }
 
+        @Override
         public void run(){
             Thread.currentThread().setName(name);
             try {

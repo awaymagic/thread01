@@ -5,6 +5,7 @@ package cn.away.tl;
  * 类说明：
  */
 public class NoThreadLocal {
+
     static int count;
 
     /**
@@ -13,11 +14,11 @@ public class NoThreadLocal {
     public void StartThreadArray(){
         Thread[] runs = new Thread[3];
         //将i赋给线程
-        for(int i=0;i<runs.length;i++){
-            runs[i]=new Thread(new TestTask(i));
+        for (int i = 0; i < runs.length; i++) {
+            runs[i] = new Thread(new TestTask(i));
         }
-        for(int i=0;i<runs.length;i++){
-            runs[i].start();
+        for (Thread run : runs) {
+            run.start();
         }
     }
 
@@ -29,10 +30,10 @@ public class NoThreadLocal {
         public TestTask(int id){
             this.id = id;
         }
+        @Override
         public void run() {
             count = id;
-            System.out.println(Thread.currentThread().getName()
-                    +" 编号为: "+count);
+            System.out.println(Thread.currentThread().getName() + " 编号为: " + count);
         }
     }
 
